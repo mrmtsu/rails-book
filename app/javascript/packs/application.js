@@ -15,7 +15,7 @@
 // const imagePath = (name) => images(name, true)
 
 import Vue from "vue";
-import App from "../App.vue";
+import App from "../app.vue";
 import Router from "../router/router.js";
 
 const app = new Vue({

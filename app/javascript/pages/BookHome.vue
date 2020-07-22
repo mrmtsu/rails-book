@@ -18,6 +18,15 @@
             <div class="detail">・著者：{{ bookInfo.author }}</div>
             <div class="detail">・出版社：{{ bookInfo.publisher }}</div>
             <div class="detail">・ジャンル：{{ bookInfo.genre }}</div>
+            <router-link :to="{ path: `/edit/${bookInfo.id}` }" class="btn"
+              >本の編集</router-link
+            >
+            <button
+              class="btn #e53935 red darken-1"
+              v-on:click="deleteBook(bookInfo.id)"
+            >
+              削除
+            </button>
           </div>
         </div>
       </div>
@@ -57,6 +66,14 @@ export default {
       axios.get(`api/books/${id}.json`).then((res) => {
         this.bookInfo = res.data;
         this.bookInfoBool = true;
+      });
+    },
+    deleteBook(id) {
+      axios.delete(`/api/books/${id}`).then((res) => {
+        this.books = [];
+        this.bookInfo = "";
+        this.bookInfoBool = false;
+        this.fetchBooks();
       });
     },
   },
