@@ -1,5 +1,5 @@
 class Api::BooksController < ApplicationController
-    protect_from_forgery :except => [:create]
+    protect_from_forgery except: [:create, :update]
 
     def index
         @books = Book.all
@@ -18,6 +18,15 @@ class Api::BooksController < ApplicationController
     def show
         @book = Book.find(params[:id])
         render 'show', formats: 'json', handlers: 'jbuilder'
+    end
+
+    def update
+        @book = Book.find(params[:id])
+        if @book.update_attributes(book_params)
+          render 'index', formats:'json', handlers: 'jbuilder'
+        else
+          render json: @book.errors, status: :unprocessable_entity
+        end
     end
 
     private

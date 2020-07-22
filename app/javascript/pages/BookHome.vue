@@ -18,6 +18,9 @@
             <div class="detail">・著者：{{ bookInfo.author }}</div>
             <div class="detail">・出版社：{{ bookInfo.publisher }}</div>
             <div class="detail">・ジャンル：{{ bookInfo.genre }}</div>
+            <router-link :to="{ path: `/edit/${bookInfo.id}` }" class="btn"
+              >本の編集</router-link
+            >
           </div>
         </div>
       </div>
