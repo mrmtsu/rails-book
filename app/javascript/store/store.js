@@ -10,8 +10,12 @@ export default new Vuex.Store({
     books: [],
     bookInfo: {},
     bookInfoBool: false,
+    signedIn: "",
   },
   mutations: {
+    fetchSignedIn(state) {
+      state.signedIn = !!localStorage.signedIn;
+    },
     fetchBooks(state) {
       state.books = [];
       axios.get("/api/books").then(
@@ -36,6 +40,11 @@ export default new Vuex.Store({
         state.bookInfo = "";
         state.bookInfoBool = false;
       });
+    },
+  },
+  actions: {
+    doFetchSignedIn({ commit }) {
+      commit("fetchSignedIn");
     },
   },
 });
