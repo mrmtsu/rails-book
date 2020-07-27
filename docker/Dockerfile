@@ -1,4 +1,5 @@
 FROM ruby:2.7.0-alpine3.10
+FROM alpine:3.7
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
@@ -7,7 +8,8 @@ ENV BASE_PACKAGES="alpine-sdk build-base tzdata" \
     BUILD_PACKAGE="mysql-client mysql-dev" \
     FAVORITE_PACKAGE="less"
 
-RUN apk update && \
+RUN apk --no-cache add foo=~1.23 && \
+    apk update && \
     apk upgrade && \
     apk --update --no-cache add \
     ${BASE_PACKAGES} \
